@@ -1,7 +1,26 @@
 {
-  "name": "my-historybook",
+  "name": "jn-my-historybook-components",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "typings": "index/index.d.ts",
+  "main": "dist/index.d.js",
+  "homepage": "https://www.innovare.com.ar",
+  "repository": {
+    "url": "https://github.com/javinobile/sb-components",
+    "type": "git"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "typescript": ">=4.0.0"
+  },
+  "release": {
+    "branches": "main"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
@@ -17,10 +36,12 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006",
-    "build": "build-storybook",
+    "build": "yarn clean && tsc && yarn copy-files",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=aa0e9920967e"
+    "chromatic": "npx chromatic --project-token=aa0e9920967e",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.css dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +70,17 @@
     "@storybook/react": "^6.4.19",
     "@storybook/testing-library": "^0.0.9",
     "babel-loader": "^8.2.4",
-    "chromatic": "^6.5.3"
-  }
+    "chromatic": "^6.5.3",
+    "copyfiles": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.2"
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 }
